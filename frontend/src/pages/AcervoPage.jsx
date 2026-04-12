@@ -14,7 +14,16 @@ export default function AcervoPage() {
       return;
     }
 
-    setError('A pasta de listagem de livros está desativada no modo cadastro único.');
+    const fetchLivros = async () => {
+      try {
+        const response = await api.get('/Livros');
+        setLivros(response.data);
+      } catch (err) {
+        setError('Erro ao buscar livros: ' + (err.response?.data?.message || err.message));
+      }
+    };
+
+    fetchLivros();
   }, [navigate]);
 
   const handleLogout = () => {
@@ -32,7 +41,7 @@ export default function AcervoPage() {
         </div>
 
         <div className="actions">
-          <Link to="/cadastro-livro" className="btn secondary">Cadastrar livro</Link>
+          <Link to="/dashboard" className="btn secondary">← Voltar</Link>
           <button className="btn danger" onClick={handleLogout}>Sair</button>
         </div>
       </div>

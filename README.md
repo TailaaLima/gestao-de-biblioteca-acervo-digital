@@ -12,7 +12,8 @@ Sistema simples de gerenciamento de acervo de livros com frontend em React + Vit
 ### Endpoints principais
 
 - `POST /api/auth/login` (usuário fake: `admin` / `1234`)
-- `POST /api/CadastrarLivro` (cadastrar livro)
+- `POST /api/CadastrarLivro` (cadastrar novo livro)
+- `GET /api/Livros` (listar todos os livros)
 
 ## Backend (.NET)
 
@@ -49,7 +50,9 @@ Sistema simples de gerenciamento de acervo de livros com frontend em React + Vit
 ### Rotas
 
 - `/` - tela de login (nome do projeto: **Acervo Digital Biblioteca**)
-- `/cadastro-livro` - formulário de cadastro
+- `/dashboard` - dashboard com opções de cadastro e listagem (após login)
+- `/cadastro-livro` - formulário de cadastro de livro
+- `/acervo` - listagem de livros cadastrados
 
 ### Configurar URL da API (se for outra porta)
 

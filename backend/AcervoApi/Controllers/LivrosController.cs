@@ -22,5 +22,13 @@ namespace AcervoApi.Controllers
             var created = await _livroService.CreateAsync(livro);
             return CreatedAtAction(nameof(Create), new { id = created.Id }, created);
         }
+
+        [HttpGet]
+        [Route("/api/Livros")]
+        public async Task<IActionResult> GetAll()
+        {
+            var livros = await _livroService.GetAllAsync();
+            return Ok(livros);
+        }
     }
 }

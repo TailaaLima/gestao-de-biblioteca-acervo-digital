@@ -33,9 +33,26 @@ export default function CadastroLivroPage() {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    navigate('/');
+  };
+
+  if (!localStorage.getItem('token')) {
+    navigate('/');
+    return null;
+  }
+
   return (
     <section className="page cadastro-page">
-      <h1>Cadastrar Livro</h1>
+      <div className="top-row">
+        <h1>Cadastrar Livro</h1>
+        <div className="actions">
+          <button className="btn secondary" onClick={() => navigate('/dashboard')}>← Voltar</button>
+          <button className="btn danger" onClick={handleLogout}>Sair</button>
+        </div>
+      </div>
       <form onSubmit={submit} className="book-form">
         <input name="titulo" value={form.titulo} onChange={handleChange} placeholder="Título" required />
         <input name="autor" value={form.autor} onChange={handleChange} placeholder="Autor" required />
@@ -50,13 +67,18 @@ export default function CadastroLivroPage() {
       {cadastroConcluido && (
         <div className="success-actions">
           <p>Livro cadastrado com sucesso! Deseja cadastrar outro?</p>
-          <button className="btn secondary" onClick={() => {
-            setForm({ titulo: '', autor: '', genero: '', anoPublicacao: '', sinopse: '' });
-            setMessage('');
-            setCadastroConcluido(false);
-          }}>
-            Cadastrar novo livro
-          </button>
+          <div className="button-group">
+            <button className="btn secondary" onClick={() => {
+              setForm({ titulo: '', autor: '', genero: '', anoPublicacao: '', sinopse: '' });
+              setMessage('');
+              setCadastroConcluido(false);
+            }}>
+              Cadastrar novo livro
+            </button>
+            <button className="btn primary" onClick={() => navigate('/dashboard')}>
+              Voltar ao menu
+            </button>
+          </div>
         </div>
       )}
     </section>
