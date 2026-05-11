@@ -56,6 +56,11 @@ export default function AcervoPage() {
             <p>{livro.autor} - {livro.anoPublicacao}</p>
             <p>{livro.genero}</p>
             <p>{livro.sinopse}</p>
+            <div className="card-actions">
+              <button className="btn secondary" onClick={() => navigate(`/editar-livro/${livro.id}`)}>
+                Editar
+              </button>
+            </div>
           </article>
         ))}
       </div>

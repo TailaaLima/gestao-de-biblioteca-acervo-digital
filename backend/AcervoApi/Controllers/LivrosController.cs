@@ -30,5 +30,27 @@ namespace AcervoApi.Controllers
             var livros = await _livroService.GetAllAsync();
             return Ok(livros);
         }
+
+        [HttpGet]
+        [Route("/api/Livros/{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var livro = await _livroService.GetByIdAsync(id);
+            if (livro == null) return NotFound();
+            return Ok(livro);
+        }
+
+        [HttpPut]
+        [Route("/api/Livros/{id}")]
+        public async Task<IActionResult> Update(int id, [FromBody] Livro livro)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            if (id != livro.Id) return BadRequest("O ID do livro na rota deve corresponder ao ID do corpo da requisição.");
+
+            var updated = await _livroService.UpdateAsync(id, livro);
+            if (!updated) return NotFound();
+
+            return NoContent();
+        }
     }
 }

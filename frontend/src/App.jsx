@@ -3,6 +3,7 @@ import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import AcervoPage from './pages/AcervoPage';
 import CadastroLivroPage from './pages/CadastroLivroPage';
+import EditLivroPage from './pages/EditLivroPage';
 import './App.css';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/acervo" element={<AcervoPage />} />
         <Route path="/cadastro-livro" element={<CadastroLivroPage />} />
+        <Route path="/editar-livro/:id" element={<EditLivroPage />} />
       </Routes>
     </BrowserRouter>
   );

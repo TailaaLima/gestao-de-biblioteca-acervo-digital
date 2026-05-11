@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AcervoApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b1579a455a066978c21e59f45e03553644e56c32")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6ed177f10ad3dac4f888de37b71c77edca85f9e3")]
 [assembly: System.Reflection.AssemblyProductAttribute("AcervoApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AcervoApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -14,6 +14,8 @@ Sistema simples de gerenciamento de acervo de livros com frontend em React + Vit
 - `POST /api/auth/login` (usuário fake: `admin` / `1234`)
 - `POST /api/CadastrarLivro` (cadastrar novo livro)
 - `GET /api/Livros` (listar todos os livros)
+- `GET /api/Livros/{id}` (obter livro por id)
+- `PUT /api/Livros/{id}` (editar livro existente)
 
 ## Backend (.NET)
 

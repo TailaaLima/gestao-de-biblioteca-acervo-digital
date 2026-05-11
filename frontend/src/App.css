@@ -112,12 +112,12 @@ button.btn.danger {
   color: #1f2041;
 }
 
-.top-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
+  .card-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+  }
+
 }
 
 .actions {
