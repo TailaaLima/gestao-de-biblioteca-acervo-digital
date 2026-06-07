@@ -5,6 +5,8 @@ import { api } from '../api';
 export default function AcervoPage() {
   const [livros, setLivros] = useState([]);
   const [error, setError] = useState('');
+  const [livroParaExcluir, setLivroParaExcluir] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,6 +34,30 @@ export default function AcervoPage() {
     navigate('/');
   };
 
+  const abrirConfirmacaoExclusao = (livro) => {
+    setLivroParaExcluir(livro);
+    setError('');
+  };
+
+  const fecharConfirmacaoExclusao = () => {
+    setLivroParaExcluir(null);
+  };
+
+  const handleDelete = async () => {
+    if (!livroParaExcluir) return;
+
+    setIsDeleting(true);
+    try {
+      await api.delete(`/Livros/${livroParaExcluir.id}`);
+      setLivros((prev) => prev.filter((livro) => livro.id !== livroParaExcluir.id));
+      fecharConfirmacaoExclusao();
+    } catch (err) {
+      setError('Erro ao excluir livro: ' + (err.response?.data?.message || err.message));
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
   return (
     <section className="page list-page">
       <div className="top-row">
@@ -48,6 +74,27 @@ export default function AcervoPage() {
 
       {error && <p className="error">{error}</p>}
 
+      {livroParaExcluir && (
+        <div className="modal-overlay" onClick={fecharConfirmacaoExclusao}>
+          <div className="modal-card" onClick={(e) => e.stopPropagation()}>
+            <h2>Excluir livro</h2>
+            <p>
+              Tem certeza que deseja excluir <strong>{livroParaExcluir.titulo}</strong>?
+              <br />
+              Esta ação não poderá ser desfeita.
+            </p>
+            <div className="modal-actions">
+              <button className="btn secondary" onClick={fecharConfirmacaoExclusao} disabled={isDeleting}>
+                Cancelar
+              </button>
+              <button className="btn danger" onClick={handleDelete} disabled={isDeleting}>
+                {isDeleting ? 'Excluindo...' : 'Excluir'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="book-list">
         {livros.length === 0 && <p>Nenhum livro cadastrado.</p>}
         {livros.map((livro) => (
@@ -59,6 +106,9 @@ export default function AcervoPage() {
             <div className="card-actions">
               <button className="btn secondary" onClick={() => navigate(`/editar-livro/${livro.id}`)}>
                 Editar
+              </button>
+              <button className="btn danger" onClick={() => abrirConfirmacaoExclusao(livro)}>
+                Excluir
               </button>
             </div>
           </article>

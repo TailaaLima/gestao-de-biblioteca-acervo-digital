@@ -52,5 +52,15 @@ namespace AcervoApi.Controllers
 
             return NoContent();
         }
+
+        [HttpDelete]
+        [Route("/api/Livros/{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var deleted = await _livroService.DeleteAsync(id);
+            if (!deleted) return NotFound();
+
+            return NoContent();
+        }
     }
 }
